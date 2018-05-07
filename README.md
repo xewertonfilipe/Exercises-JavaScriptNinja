@@ -1,3 +1,3 @@
 # Exercises-JavaScriptNinja
 
-Currently in week two
+Currently in challenge two
