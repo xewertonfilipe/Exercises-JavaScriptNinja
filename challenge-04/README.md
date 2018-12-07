@@ -114,15 +114,15 @@ citado acima, no lugar de "pessoas".
 */
 carro.addPessoas = function(qtdPessoas) {
     var total = carro.quantidadePessoas + qtdPessoas;
+    var lugarVazio = carro.assentos - carro.quantidadePessoas;
+    var pluralOuSingular = lugarVazio === 1 ? 'pessoa' : 'pessoas';
        
     if( carro.quantidadePessoas === carro.assentos && total >= carro.assentos) {
         return 'O carro já está lotado!';
     } 
     
     if(total > carro.assentos) {
-        var lugarVazio = carro.assentos - carro.quantidadePessoas;
-        var pluralOuSingular = lugarVazio === 1 ? 'pessoa' : 'pessoas';
-        return 'Só cabem mais ' + lugarVazio + ' ' + pluralOuSingular +'!';
+        return 'Só cabem mais ' + lugarVazio + ' ' + pluralOuSingular + '!';
     } 
     
     carro.quantidadePessoas += qtdPessoas;
