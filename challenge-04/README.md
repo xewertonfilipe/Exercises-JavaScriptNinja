@@ -167,7 +167,7 @@ carro.addPessoas(3); //"Já temos 5 pessoas no carro!"
 carro.removePessoas(-4); //"Já temos 1 pessoa no carro!"
 
 // Adicione 10 pessoas no carro.
-carro.addPessoas(10); //
+carro.addPessoas(10); //"Só cabem mais 4 pessoas no carro!"
 
 // Quantas pessoas temos no carro?
 carro.quantidadePessoas(); //1
