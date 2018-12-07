@@ -122,11 +122,10 @@ carro.addPessoas = function(qtdPessoas) {
     if(total > carro.assentos) {
         var lugarVazio = carro.assentos - carro.quantidadePessoas;
         var pluralOuSingular = lugarVazio === 1 ? 'pessoa' : 'pessoas';
-
         return 'Só cabem mais ' + lugarVazio + ' ' + pluralOuSingular +'!';
-    } else {
-        carro.quantidadePessoas += qtdPessoas;
-    }
+    } 
+    
+    carro.quantidadePessoas += qtdPessoas;
     return 'Já temos ' + carro.quantidadePessoas + ' pessoas no carro!';
 };
 
