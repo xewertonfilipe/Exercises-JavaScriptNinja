@@ -16,7 +16,16 @@ As propriedades e tipos de valores para cada propriedade desse objeto devem ser:
 - `andando` - Boolean - recebe "falso" por padrão
 - `caminhouQuantosMetros` - Number - recebe "zero" por padrão
 */
-var pessoa = { nome: 'Ewerton', sobrenome: 'Filipe', sexo: 'masculino', idade: 28, altura: 1.80, peso: '60', andando: false, caminhouQuantosMetros: 0 };
+var pessoa = { 
+    nome: 'Ewerton', 
+    sobrenome: 'Filipe', 
+    sexo: 'masculino', 
+    idade: 28, 
+    altura: 1.80, 
+    peso: 60, 
+    andando: false, 
+    caminhouQuantosMetros: 0
+};
 
 /*
 Adicione um método ao objeto `pessoa` chamado `fazerAniversario`. O método deve
@@ -55,7 +64,7 @@ Crie um método chamado `nomeCompleto`, que retorne a frase:
 - "Olá! Meu nome é [NOME] [SOBRENOME]!"
 */
 pessoa.nomeCompleto = function() {
-    return pessoa.nome + ' ' + pessoa.sobrenome;
+    return 'Olá! Meu nome é ' + pessoa.nome + ' ' + pessoa.sobrenome + '!';
 }
 
 /*
@@ -177,14 +186,14 @@ pessoa.apresentacao = function() {
     if(pessoa.sexo == 'feminino') {
         apresentacao = 'a';
     } 
-    if(pessoa.idade == 1) {
+    if(pessoa.idade === 1) {
         vida = 'ano';
     }
-    if(pessoa.caminhouQuantosMetros == 1) {
+    if(pessoa.caminhouQuantosMetros === 1) {
         metro = 'metro';
     }
 
-    return 'Olá, eu sou ' + apresentacao + ' ' + pessoa.nomeCompleto() + ' tenho ' + pessoa.idade + ' ' + vida + ', ' + pessoa.altura + ', ' + 'meu peso é ' + pessoa.peso + ' e, só hoje, eu já caminhei ' + pessoa.caminhouQuantosMetros + ' ' + metro + '!';
+    return 'Olá, eu sou ' + apresentacao + ' ' + pessoa.nome + ' ' + pessoa.sobrenome + ', tenho ' + pessoa.idade + ' ' + vida + ', ' + pessoa.altura + ', ' + 'meu peso é ' + pessoa.peso + ' e, só hoje, eu já caminhei ' + pessoa.caminhouQuantosMetros + ' ' + metro + '!';
 }
 
 // Agora, apresente-se ;)
