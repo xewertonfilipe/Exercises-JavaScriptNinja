@@ -164,7 +164,7 @@ pessoa.caminhouQuantosMetros //60
 /*
 Agora vamos deixar a brincadeira um pouco mais divertida! :D
 Crie um método para o objeto `pessoa` chamado `apresentacao`. Esse método deve
-retornar a string:
+retornar a string
 - "Olá, eu sou o [NOME COMPLETO], tenho [IDADE] anos, [ALTURA], meu peso é [PESO] e, só hoje, eu já caminhei [CAMINHOU QUANTOS METROS] metros!"
 
 Só que, antes de retornar a string, você vai fazer algumas validações:
