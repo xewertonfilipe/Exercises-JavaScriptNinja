@@ -60,7 +60,7 @@
     os dois parâmetros da função de retorno de "calculator".
     */
     function calculator( operator ) {
-        if( !isOperatorValid( operator )) {
+        if( !isOperatorValid( operator ) ) {
             return false;
         }
         return function( num1, num2 ) {
@@ -89,7 +89,7 @@
     'Operação "[OPERATOR]" não permitida!'
     */
     function showErrorMessage( operator ) {
-        return 'Operação "' + operator + '" não permitida!';
+        return 'Operação ' + operator + ' não permitida!';
     }
 
     /*
@@ -124,12 +124,12 @@
     - Se "sum" for "false", mostrar no console a mensagem de erro.
     */
     if( sum ) {
-        number1 = 100;
-        number2 = 52;
+        number1 = 10;
+        number2 = 23;
         console.log( showOperationMessage( operationSignal, number1, number2 ), sum( number1, number2 ) );
     }
     else {
-        console.log( showErrorMessage( operationSignal ));
+        console.log( showErrorMessage( operatorSignal ) );
     }
     
 
@@ -138,67 +138,68 @@
     divisão e resto. Crie variáveis com os nomes "subtraction",
     "multiplication", "division" e "mod".
     */
-   operationSignal = '-';
-   var subtraction = calculator( operationSignal );
+    operationSignal = '-';
+    var subtraction = calculator( operationSignal );
 
-   if( subtraction ) {
-        number1 = 50;
-        number2 = 52;
-        console.log( showOperationMessage( operationSignal, number1, number2 ), subtraction( number1, number2 ) );
+    if( subtraction ) {
+        number1 = 55;
+        number2 = 40;
+        console.log( showOperationMessage( operationSignal, number1, number2), subtraction(number1, number2 ) );
     }
     else {
-        console.log( showErrorMessage( operationSignal ));
+        console.log( showErrorMessage( operationSignal ) );
     }
 
     operationSignal = '*';
     var multiplication = calculator( operationSignal );
 
     if( multiplication ) {
-        number1 = 3;
-        number2 = 52;
-        console.log( showOperationMessage( operationSignal, number1, number2 ), multiplication( number1, number2 ) );
+        number1 = 7;
+        number2 = 5;
+        console.log( showOperationMessage(operationSignal, number1, number2 ), multiplication( number1, number2 ) );
     }
     else {
-        console.log( showErrorMessage( operationSignal ));
+        console.log( showErrorMessage( operationSignal ) );
     }
 
     operationSignal = '/';
     var division = calculator( operationSignal );
 
     if( division ) {
-        number1 = 150;
-        number2 = 3;
+        number1 = 100;
+        number2 = 5;
         console.log( showOperationMessage( operationSignal, number1, number2 ), division( number1, number2 ) );
     }
     else {
-        console.log( showErrorMessage( operationSignal ));
+        console.log( showErrorMessage( operationSignal ) );
     }
 
     operationSignal = '%';
     var mod = calculator( operationSignal );
 
     if( mod ) {
-        number1 = 150;
-        number2 = 3;
+        number1 = 50;
+        number2 = 2;
         console.log( showOperationMessage( operationSignal, number1, number2 ), mod( number1, number2 ) );
     }
     else {
-        console.log( showErrorMessage( operationSignal ));
+        console.log( showErrorMessage( operationSignal ) );
     }
 
     /*
     Repita o PASSO 2 novamente, mas passando um operador inválido, para ver se
     a mensagem de erro será mostrada no console.
     */
-   operationSignal = 'b';
-   var invalid = calculator( operationSignal );
+   operationSignal = 'a';
+   var error = calculator( operationSignal );
 
-   if( invalid ) {
-        number1 = 3;
-        number2 = 52;
-        console.log( showOperationMessage( operationSignal, number1, number2 ), invalid( number1, number2 ) );
-    }
-    else {
-        console.log( showErrorMessage( operationSignal ));
-    }   
+   if( error ) {
+       number1 = 50;
+       number2 = 30;
+       console.log( showOperationMessage( operationSignal, number1, number2, ), error( number1, number2 ) );
+   }
+   else {
+    console.log( showErrorMessage( operationSignal ) );
+}
+    
 })();
