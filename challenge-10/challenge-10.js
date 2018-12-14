@@ -194,7 +194,7 @@
    var error = calculator( operationSignal );
 
    if( error ) {
-       number1 = 50;
+       number1 = 55;
        number2 = 30;
        console.log( showOperationMessage( operationSignal, number1, number2, ), error( number1, number2 ) );
    }
