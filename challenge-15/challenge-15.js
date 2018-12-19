@@ -22,23 +22,24 @@
     adicionados à idade original (age). Esse método deverá retornar o objeto
     que será instanciado.
   */
-  function Person( name, lastName, age) {
+  function Person( name, lastName, age ) {
     this.name = name;
     this.lastName = lastName;
     this.age = age;
-    
+
     this.getFullName = function getFullName() {
       return this.name + ' ' + this.lastName;
     };
 
     this.getAge = function getAge() {
       return this.age;
-    };
+    }
 
     this.addAge = function addAge() {
       this.age += arguments[0];
       return this;
     };
+
   }
 
   /*
@@ -50,27 +51,26 @@
   console.log( 'Novas pessoas criadas à partir de Person:' );
   var ewerton = new Person( 'Ewerton', 'Filipe', 60 );
   var filipe = new Person( 'Filipe', 'Ewerton', 40 );
-  var nascimento = new Person( 'Ewerton', 'Nascimento', 20 );
+  var gabriel = new Person( 'Gabriel', 'B', 30 );
   console.log( ewerton );
   console.log( filipe );
-  console.log( nascimento );
+  console.log( gabriel );
   /*
   Mostre no console o nome completo de cada pessoa.
   */
  console.log( '\nNomes das pessoas:' );
  console.log( ewerton.getFullName() );
  console.log( filipe.getFullName() );
- console.log( nascimento.getFullName() );
+ console.log( gabriel.getFullName() );
  
  /*
  Mostre no console as idades de cada pessoa, com a frase:
  - "[NOME COMPLETO] tem [IDADE] anos."
  */
 console.log( '\nIdade das pessoas:' );
-console.log( ewerton.getFullName() + ' tem ' + ewerton.getAge() + ' anos.');
-console.log( filipe.getFullName() + ' tem ' + filipe.getAge() + ' anos.');
-console.log( nascimento.getFullName() + ' tem ' + nascimento.getAge() + ' anos.');
-
+console.log( ewerton.getFullName() + ' tem ' + ewerton.getAge() + ' anos.' );
+console.log( filipe.getFullName() + ' tem ' + filipe.getAge() + ' anos.' );
+console.log( gabriel.getFullName() + ' tem ' + gabriel.getAge() + ' anos.' );
   
   /*
   Adicione alguns anos à cada pessoa, e mostre no console a nova idade de
@@ -78,7 +78,7 @@ console.log( nascimento.getFullName() + ' tem ' + nascimento.getAge() + ' anos.'
   - "[NOME COMPLETO] agora tem [NOVA IDADE] anos."
   */
   console.log( '\nNova idade das pessoas:' );
-  console.log( ewerton.getFullName() + ' agora tem ' + ewerton.addAge(5).getAge() + ' anos.');
-  console.log( filipe.getFullName() + ' agora tem ' + filipe.addAge(4).getAge() + ' anos.');
-  console.log( nascimento.getFullName() + ' agora tem ' + nascimento.addAge(3).getAge() + ' anos.');
+  console.log( ewerton.getFullName() + ' agora tem ' + ewerton.addAge(5).getAge() + ' anos.' );
+  console.log( filipe.getFullName() + ' agora tem ' + filipe.addAge(4).getAge() + ' anos.' );
+  console.log( gabriel.getFullName() + ' agora tem ' + gabriel.addAge(3).getAge() + ' anos.');
 })();
