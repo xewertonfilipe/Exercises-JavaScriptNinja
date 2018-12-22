@@ -20,9 +20,7 @@
     no console:
     */
     console.log( 'Adicionando seu nome no texto:' );
-    console.log( text.replace( /Manuel Marques de Sousa/g, function() {
-        return 'Ewerton Filipe';
-    }) );
+    console.log( text.replace( /Manuel Marques de Sousa/g, 'Ewerton Filipe'));
 
     /*
     Agora, substitua a palavra "brasileiro" por sua cidade natal e mostre no
@@ -30,18 +28,14 @@
     Ex: Se você for da São Paulo, substitua por "paulista".
     */
     console.log( '\nTrocando naturalidade:' );
-    console.log( text.replace( /brasileiro/g, function() {
-        return 'Recifense';
-    }) );
+    console.log( text.replace( /brasileiro/g, 'recifense') );
 
     /*
     Substitua todos os números por um traço `-`. Cada caractere de número deve
     ser um traço. Mostre o resultado no console:
     */
     console.log( '\nTrocando números por -:' );
-    console.log( text.replace( /\d/g, function() {
-        return '-';
-    }) );
+    console.log( text.replace( /\d/g, '-') );
 
     /*
     Substitua todas as letras (somente letras) de "D" maiúsculo até "h"
