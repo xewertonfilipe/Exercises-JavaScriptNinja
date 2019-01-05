@@ -1,3 +1,3 @@
 # Exercises-JavaScriptNinja
 
-Currently in challenge twentytwo
+Currently in challenge twentythree
