@@ -124,7 +124,7 @@
         return item.length > 7;
     });
     console.log( 
-        result 
+        result
         ? 'Sim, todos os estados tem mais de 7 letras!'
         : 'Nem todos os estados tem mais de 7 letras!'
     );
