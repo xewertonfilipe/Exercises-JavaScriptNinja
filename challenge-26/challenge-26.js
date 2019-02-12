@@ -23,17 +23,17 @@
   Só passe para o próximo problema quando tiver resolvido o anterior :)
   */
   // ?
-  function DOM( elements ) {
+  function DOM(elements) {
     this.element = doc.querySelectorAll(elements);
   }
 
-  DOM.prototype.on = function on(event, callback ) {
+  DOM.prototype.on = function on(event, callback) {
     Array.prototype.forEach.call(this.element, function(item){
       item.addEventListener(event, callback, false);
     });
   }
 
-  DOM.prototype.off = function off(event, callback ) {
+  DOM.prototype.off = function off(event, callback) {
     Array.prototype.forEach.call(this.element, function(item) {
       item.removeEventListener(event, callback, false);
     });

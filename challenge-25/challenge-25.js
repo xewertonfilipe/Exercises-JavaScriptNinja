@@ -16,31 +16,25 @@
     Tente aplicar na prática alguns dos eventos que estão ali e coloque nesse
     desafio os experimentos legais que você conseguir desenvolver :D
     */
-    var $h1 = selector('h1');
-
-    function selector( element ) {
-        return doc.querySelector( element ); 
-    }
-
     function addEvent( event, callback ) {
-        return win.addEventListener(event, callback, false);
+        doc.addEventListener(event, callback, false);
     }
 
     function addEventInElement( element, event, callback ) {
-        return element = doc.addEventListener(event, callback, false);
+        element.addEventListener(event, callback, false);
     }
     
     function beforeprint() {
-        alert('Antes de realizar a impressão, confira seus dados!');
+        alert('Antes de realizar a impressão confira seus dados!');
     }
 
     function mouseInElement(event) {
         var $target = event.target;
-        if( $target.tagName == 'H1')
+        if( $target.nodeName == 'H1')
             alert('Mostra a div!');
     }
 
-    addEventInElement( $h1, 'mouseover', mouseInElement );
+    addEvent('mouseover', mouseInElement );
     addEvent( 'beforeprint', beforeprint );
     
 })(window, document);
