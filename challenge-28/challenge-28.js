@@ -111,6 +111,9 @@
 
   var ajax = new XMLHttpRequest();
   var url = 'http://apps.widenet.com.br/busca-cep/api/cep/<cepCode>.json';
+  var stringInfoBuscando = 'Informação: Buscando informações para o CEP: ';
+  var stringInfoNaoEncontrado = 'Informação: Não encontramos o endereço para o CEP: ';
+  var stringInfoEncontrou = 'Informação: Endereço referente ao CEP: ';
   var $inputCEP = new DOM('[data-js="cep"]');
   var $inputBuscar = new DOM('[data-js="buscar"]');
   var $p = new DOM('[data-js="info"]');
@@ -119,50 +122,24 @@
   var $cidade = new DOM('[data-js="cidade"]');
   var $cepRetornado = new DOM('[data-js="cepRetornado"]');
   
-  $inputBuscar.on('click', searchAddressAndSetStatus);
+  $inputBuscar.on('click', initialize);
 
-  function searchAddressAndSetStatus(e) {
-    e.preventDefault();
-    if(hasValueInInput()) {
-      ajax.open('GET', replaceUrl());
-      ajax.send();
-      console.log(ajax);
-      ajax.addEventListener('readystatechange', setStatus);
-    } else {
-      alert("Campo CEP em branco");
-    }
+  function initialize(e) {
+    clearAddress();
+    if(hasValueInInput())
+      return searchAddress(e);
+    alert("Valor inválido!");
   }
 
   function hasValueInInput() {
-    return !$inputCEP.get()[0].value == '';
+    return $inputCEP.get()[0].value.replace(/\D+/g, '');
   } 
 
-  function setStatus() {
-    var texto = doc.createTextNode('Informação: Buscando informações para o CEP: ' + cepNumber() + '...');
-    removeValueElement($p);
-    $p.get()[0].appendChild(texto);
-    whomStatus();
-  }
-  function whomStatus() {
-    var data = JSON.parse(ajax.responseText || '[]');
-    var texto;
-    console.log(data);
-    setTimeout(function() {
-      if(data.status == 0) {
-        texto = doc.createTextNode('Informação: Não encontramos o endereço para o CEP: ' + cepNumber());
-        removeValueElement($p);
-        return $p.get()[0].appendChild(texto);
-      }
-    texto = doc.createTextNode('Informação: Endereço referente ao CEP: ' + cepNumber());
-    removeValueElement($p);
-    setAddress(data);
-    $p.get()[0].appendChild(texto);
-    }, 2000);
-  }
-
-  function removeValueElement(element) {
-    if(!(element.get()[0].innerHTML == ''))
-      return element.get()[0].innerHTML = '';
+  function searchAddress(e) {
+    e.preventDefault();
+    ajax.open('GET', replaceUrl());
+    ajax.send();
+    ajax.addEventListener('readystatechange', setStatus);
   }
 
   function replaceUrl() {
@@ -173,10 +150,45 @@
     return $inputCEP.get()[0].value.replace(/\D+/g, '');
   }
 
+  function setStatus() {
+    var data = JSON.parse(ajax.responseText || '[]');
+    var texto = doc.createTextNode(stringInfoBuscando + cepNumber());
+    removeValueElement($p);
+    $p.get()[0].appendChild(texto);
+    texto = doc.createTextNode(whomStatus() + cepNumber());
+    setInterval(function() {
+      removeValueElement($p);
+      $p.get()[0].appendChild(texto);
+      setAddress(data);
+    }, 2000);
+  }
+
+  function whomStatus() {
+    var data = JSON.parse(ajax.responseText || '[]');
+      if(data.status == 0)
+        return stringInfoNaoEncontrado;
+    return stringInfoEncontrou;
+  }
+
+  function removeValueElement(element) {
+    if(!(element.get()[0].innerHTML == ''))
+      return element.get()[0].innerHTML = '';
+  }
+
+
   function setAddress(data) {
-    $logradouro.get()[0].textContent = 'Rua: ' + data.address;
-    $cidade.get()[0].textContent = 'Cidade: ' + data.city;
-    $estado.get()[0].textContent = 'Estado: ' + data.state;
-    $cepRetornado.get()[0].textContent = 'CEP: ' + data.code;
+    if(data.status) {
+      $logradouro.get()[0].textContent = 'Rua: ' + data.address;
+      $cidade.get()[0].textContent = 'Cidade: ' + data.city;
+      $estado.get()[0].textContent = 'Estado: ' + data.state;
+      $cepRetornado.get()[0].textContent = 'CEP: ' + data.code;
+    }
+  }
+
+  function clearAddress() {
+      $logradouro.get()[0].textContent = 'Rua: ';
+      $cidade.get()[0].textContent = 'Cidade: ';
+      $estado.get()[0].textContent = 'Estado: ';
+      $cepRetornado.get()[0].textContent = 'CEP: ';
   }
 })(document);
