@@ -121,13 +121,6 @@
   
   $form.on('submit', initialize);
 
-  // ajax.open('GET', 'https://viacep.com.br/ws/12313-030/json/');
-  // ajax.send(null);
-  // var teste = isRequestOk();
-  // console.log('isrequestOk', teste);
-  // console.log(ajax);
-
-
   function initialize(e) {
     if(hasValueInInput())
       return searchAddress(e);
