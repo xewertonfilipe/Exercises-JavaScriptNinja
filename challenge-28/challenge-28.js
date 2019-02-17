@@ -110,14 +110,14 @@
   }
 
   var ajax = new XMLHttpRequest();
-  var url = 'http://apps.widenet.com.br/busca-cep/api/cep/<cepCode>.json';
-  var stringInfoBuscando = 'Informação: Buscando informações para o CEP: ';
-  var stringInfoNaoEncontrado = 'Informação: Não encontramos o endereço para o CEP: ';
-  var stringInfoEncontrou = 'Informação: Endereço referente ao CEP: ';
+  var stringInfoBuscando = 'Buscando informações para o CEP: ';
+  var stringInfoNaoEncontrado = 'Não encontramos o endereço para o CEP: ';
+  var stringInfoEncontrou = 'Endereço referente ao CEP: ';
   var $inputCEP = new DOM('[data-js="cep"]');
   var $inputBuscar = new DOM('[data-js="buscar"]');
-  var $p = new DOM('[data-js="info"]');
+  var informacao = new DOM('[data-js="info"]');
   var $logradouro = new DOM('[data-js="logradouro"]');
+  var $bairro = new DOM('[data-js="bairro"]');
   var $estado = new DOM('[data-js="estado"]');
   var $cidade = new DOM('[data-js="cidade"]');
   var $cepRetornado = new DOM('[data-js="cepRetornado"]');
@@ -125,7 +125,7 @@
   $inputBuscar.on('click', initialize);
 
   function initialize(e) {
-    clearAddress();
+    // clearAddress();
     if(hasValueInInput())
       return searchAddress(e);
     alert("Valor inválido!");
@@ -137,28 +137,25 @@
 
   function searchAddress(e) {
     e.preventDefault();
-    ajax.open('GET', replaceUrl());
+    var url = getUrl();
+    ajax.open('GET', url);
     ajax.send();
     ajax.addEventListener('readystatechange', setStatus);
   }
 
-  function replaceUrl() {
-    return url.replace('<cepCode>', cepNumber());
-  }
-
-  function cepNumber() {
-    return $inputCEP.get()[0].value.replace(/\D+/g, '');
+  function getUrl() {
+    return 'https://viacep.com.br/ws/[CEP]/json/'.replace(
+        '[CEP]', 
+        $inputCEP.get()[0].value.replace(/\D+/g, '')
+      );
   }
 
   function setStatus() {
     var data = JSON.parse(ajax.responseText || '[]');
-    var texto = doc.createTextNode(stringInfoBuscando + cepNumber());
-    removeValueElement($p);
-    $p.get()[0].appendChild(texto);
-    texto = doc.createTextNode(whomStatus() + cepNumber());
-    setInterval(function() {
-      removeValueElement($p);
-      $p.get()[0].appendChild(texto);
+    console.log('dados', data);
+    informacao.get()[0].textContent = stringInfoBuscando + data.cep;
+    setTimeout(function() {
+      informacao.get()[0].textContent = whomStatus() + data.cep;
       setAddress(data);
     }, 2000);
   }
@@ -170,25 +167,19 @@
     return stringInfoEncontrou;
   }
 
-  function removeValueElement(element) {
-    if(!(element.get()[0].innerHTML == ''))
-      return element.get()[0].innerHTML = '';
-  }
-
-
   function setAddress(data) {
-    if(data.status) {
-      $logradouro.get()[0].textContent = 'Rua: ' + data.address;
-      $cidade.get()[0].textContent = 'Cidade: ' + data.city;
-      $estado.get()[0].textContent = 'Estado: ' + data.state;
-      $cepRetornado.get()[0].textContent = 'CEP: ' + data.code;
-    }
+      $logradouro.get()[0].textContent = data.logradouro;
+      $bairro.get()[0].textContent = data.bairro;
+      $cidade.get()[0].textContent = data.localidade;
+      $estado.get()[0].textContent = data.uf;
+      $cepRetornado.get()[0].textContent = data.cep;
   }
 
   function clearAddress() {
-      $logradouro.get()[0].textContent = 'Rua: ';
-      $cidade.get()[0].textContent = 'Cidade: ';
-      $estado.get()[0].textContent = 'Estado: ';
-      $cepRetornado.get()[0].textContent = 'CEP: ';
+      $logradouro.get()[0].textContent = '';
+      $bairro.get()[0].textContent = '';
+      $cidade.get()[0].textContent = '';
+      $estado.get()[0].textContent = '';
+      $cepRetornado.get()[0].textContent = '';0
   }
 })(document);
