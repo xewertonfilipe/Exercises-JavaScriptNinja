@@ -7,20 +7,20 @@
     <title>Challenge 28</title>
 </head>
 <body>
-    <form data-js="form-cep">
+    <form data-js="form">
         <input type="text" data-js="cep">
         <button type="submit" data-js="buscar">Buscar CEP</button>
     </form>
 
     <div>
-        <p> <strong>Informação:</strong> <span data-js="info"></span> </p>
+        <p data-js="status"></p>
     </div>
 
-    <p> <strong>Rua:</strong> <span data-js="logradouro"></span> </p>
-    <p> <strong>Bairro:</strong> <span data-js="bairro"></span> </p>
-    <p> <strong>Cidade:</strong> <span data-js="cidade"></span> </p>
-    <p> <strong>Estado:</strong> <span data-js="estado"></span> </p>
-    <p> <strong>CEP:</strong> <span data-js="cepRetornado"></span> </p>
+    <p> <strong>Rua:</strong> <span data-js="logradouro">-</span> </p>
+    <p> <strong>Bairro:</strong> <span data-js="bairro">-</span> </p>
+    <p> <strong>Cidade:</strong> <span data-js="cidade">-</span> </p>
+    <p> <strong>Estado:</strong> <span data-js="estado">-</span> </p>
+    <p> <strong>CEP:</strong> <span data-js="cepRetornado">-</span> </p>
 
     <script src="challenge-28.js"></script>
 </body>
