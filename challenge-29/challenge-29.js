@@ -1,4 +1,4 @@
-(function() {
+(function(DOM, doc) {
   'use strict';
 
   /*
@@ -36,4 +36,80 @@
   que será nomeado de "app".
   */
 
-})();
+  function app() {
+    var fragment = doc.createDocumentFragment();
+    var $form = new DOM('[data-js="form"]');
+    var $urlImagem = new DOM('[data-js="url-imagem"]');
+    var $marca = new DOM('[data-js="marca"]');
+    var $ano = new DOM('[data-js="ano"]');
+    var $placa = new DOM('[data-js="placa"]');
+    var $cor = new DOM('[data-js="cor"]');
+    var $table = new DOM('[data-js="table"]');
+
+    function initialize() {
+      submitForm();
+    }
+    
+    function submitForm() {
+      $form.on('submit', addCarInTable);
+    }
+
+    function addCarInTable(event) {
+      event.preventDefault();
+      var data = capturesInputValue();
+      var trCompleta = doc.createElement('tr');
+      var tdUrl = doc.createElement('td');
+      var tdMarca = doc.createElement('td');
+      var tdAno = doc.createElement('td');
+      var tdPlaca = doc.createElement('td');
+      var tdCor = doc.createElement('td');
+      var url = doc.createTextNode(data.url);
+      var marca = doc.createTextNode(data.marca);
+      var ano = doc.createTextNode(data.ano);
+      var placa = doc.createTextNode(data.placa);
+      var cor = doc.createTextNode(data.cor);
+      tdUrl.appendChild(url);
+      tdMarca.appendChild(marca);
+      tdAno.appendChild(ano);
+      tdPlaca.appendChild(placa);
+      tdCor.appendChild(cor);
+      trCompleta.appendChild(tdUrl);
+      trCompleta.appendChild(tdMarca);
+      trCompleta.appendChild(tdAno);
+      trCompleta.appendChild(tdPlaca);
+      trCompleta.appendChild(tdCor);
+      createElementTd(trCompleta);
+    }
+
+    function hasChildInTable() {
+      return $table.get()[0].firstElementChild;
+    }
+
+    function createElementTd(element) {
+      return $table.get()[0].appendChild(element);
+    }
+
+    function capturesInputValue() {
+      var url = doc.createTextNode($urlImagem.get()[0].value);
+      var marca = doc.createTextNode($marca.get()[0].value);
+      var ano = doc.createTextNode($ano.get()[0].value);
+      var placa = doc.createTextNode($placa.get()[0].value);
+      var cor = doc.createTextNode($cor.get()[0].value);
+      return {
+        url: url.textContent,
+        marca: marca.textContent,
+        ano: ano.textContent,
+        placa: placa.textContent,
+        cor: cor.textContent
+      };
+    }
+
+    return {
+      initialize: initialize
+    };
+    
+  }
+
+  app().initialize();
+
+})(window.DOM, document);
