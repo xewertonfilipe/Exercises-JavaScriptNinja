@@ -34,7 +34,6 @@
   function app() {
     var fragment = doc.createDocumentFragment();
     var $form = new DOM('[data-js="form"]');
-    
     var $table = new DOM('[data-js="table"]');
 
     function initialize() {
