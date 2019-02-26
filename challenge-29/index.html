@@ -8,25 +8,49 @@
     <title>Challenge 29</title>
 </head>
 <body>
-    <form data-js="form">
-        <input type="text" data-js="url-imagem" placeholder="URL da imagem">
-        <input type="text" data-js="marca" placeholder="Marca/Modelo">
-        <input type="text" data-js="ano" placeholder="Ano">
-        <input type="text" data-js="placa" placeholder="Placa">
-        <input type="text" data-js="cor" placeholder="Cor">
-        <button type="submit" data-js="cadastrar">Cadastrar</button>
+    <header class="header">
+        <span data-js="company-name"></span>
+        <span data-js="company-phone"></span>
+    </header>
+    <form data-js="form" class="form">
+        <ul>
+            <li>
+                <label>Imagem do carro</label>
+                <input type="url" data-js="url-imagem">
+            </li>
+            <li>
+                <label>Marca / Modelo</label>
+                <input type="text" data-js="marca">
+            </li>
+            <li>
+                <label>Ano</label>
+                <input type="text" data-js="ano">
+            </li>
+            <li>
+                <label>Placa</label>
+                <input type="text" data-js="placa">
+            </li>
+            <li>
+                <label>Cor</label>
+                <input type="text" data-js="cor">
+            </li>
+            <li>
+                <button class="btn" type="submit">Cadastrar</button>
+            </li>
+        </ul>
     </form>
+    <table data-js="table" class="table">
+        <thead>
+            <tr>
+                <th>Imagem</th>
+                <th>Marca/Modelo</th>
+                <th>Ano</th>
+                <th>Placa</th>
+                <th>Cor</th>
+            </tr>
+        </thead>
 
-    </br></br>
-
-    <table data-js="table">
-        <tr>
-            <th>Imagem</th>
-            <th>Marca/Modelo</th>
-            <th>Ano</th>
-            <th>Placa</th>
-            <th>Cor</th>
-        </tr>
+        <tbody data-js="table-car"></tbody>
     </table>
 
     <script src="DOM.js"></script>

@@ -1,4 +1,4 @@
-(function(DOM, doc) {
+(function($, doc) {
   'use strict';
 
   /*
@@ -31,79 +31,72 @@
   que será nomeado de "app".
   */
 
-  function app() {
-    var $form = new DOM('[data-js="form"]');
-    var $table = new DOM('[data-js="table"]');
-
-    function initialize() {
-      submitForm();
-    }
-    
-    function submitForm() {
-      $form.on('submit', createTd);
-    }
-
-    function createTd(event) {
-      event.preventDefault();
-      var arrayTds = [];
-      var totalTd = totalThElement();
-      for(let index = 0; index < totalTd; index++) {
-        arrayTds.push(doc.createElement('td'));
-      }
-      return addNodeInTd(arrayTds);
-    }
-
-    function addNodeInTd(arrayTds) {
-      var textsNodes = capturesInputValue();
-      arrayTds.forEach(function(td, index) {
-        td.appendChild(textsNodes[index]);
-      });
-      return addTdInTr(arrayTds);
-    }
-
-    function addTdInTr(tds) {
-      var tr = doc.createElement('tr');
-      tds.forEach(function(item) {
-        tr.appendChild(item);
-      });
-      return addTrFullInTable(tr);
-    }
-
-    function addTrFullInTable(tr) {
-      $table.get()[0].appendChild(tr);
-    }
-
-    function totalThElement() {
-      return $table.get()[0].firstElementChild.firstElementChild
-        .childElementCount;
-    }
-
-    function capturesInputValue() {
-      var $urlImagem = new DOM('[data-js="url-imagem"]');
-      var $marca = new DOM('[data-js="marca"]');
-      var $ano = new DOM('[data-js="ano"]');
-      var $placa = new DOM('[data-js="placa"]');
-      var $cor = new DOM('[data-js="cor"]');
-      var url = $urlImagem.get()[0].value;
-      var marca = $marca.get()[0].value;
-      var ano = $ano.get()[0].value;
-      var placa = $placa.get()[0].value;
-      var cor = $cor.get()[0].value;
-      return [
-        doc.createTextNode(url),
-        doc.createTextNode(marca),
-        doc.createTextNode(ano),
-        doc.createTextNode(placa),
-        doc.createTextNode(cor)
-      ];
-    }
-
+  var app = (function appController() {
     return {
-      initialize: initialize
+      init: function init() {
+        this.companyInfo();
+        this.initEvents();
+      },
+
+      initEvents: function initEvents() {
+        $('[data-js="form"]').on('submit', this.handleSubmit);
+      },
+
+      handleSubmit: function handleSubmit(e) {
+        e.preventDefault();
+        console.log('submit');
+        var $tableCar = $('[data-js="table-car"]').get();
+        $tableCar.appendChild(app.createNewCar());
+      },
+
+      createNewCar: function createNewCar() {
+        var $fragment = doc.createDocumentFragment();
+        var $tr = doc.createElement('tr');
+        var $tdImagem = doc.createElement('td');
+        var $imagem = doc.createElement('img');
+        var $tdMarca = doc.createElement('td');
+        var $tdAno = doc.createElement('td');
+        var $tdPlaca = doc.createElement('td');
+        var $tdCor = doc.createElement('td');
+
+        $imagem.setAttribute('src', $('[data-js="url-imagem"]').get().value);
+        $tdImagem.appendChild($imagem);
+        $tdMarca.textContent = $('[data-js="marca"]').get().value;
+        $tdAno.textContent = $('[data-js="ano"]').get().value;
+        $tdPlaca.textContent = $('[data-js="placa"]').get().value;
+        $tdCor.textContent = $('[data-js="cor"]').get().value;
+
+        $tr.appendChild($tdImagem);
+        $tr.appendChild($tdMarca);
+        $tr.appendChild($tdAno);
+        $tr.appendChild($tdPlaca);
+        $tr.appendChild($tdCor);
+
+        return $fragment.appendChild($tr);
+      },
+
+      companyInfo: function companyInfo() {
+        var ajax = new XMLHttpRequest();
+        ajax.open('GET', '/Exercises-JavaScriptNinja/challenge-29/company.json', true);
+        ajax.send();
+        ajax.addEventListener('readystatechange', this.getCompanyInfo, false);
+      },
+
+      getCompanyInfo: function getCompanyInfo() {
+        if(!app.isReady.call(this))
+          return;
+        var data = JSON.parse(this.responseText);
+        var $companyName = $('[data-js="company-name"]').get();
+        var $companyPhone = $('[data-js="company-phone"]').get();
+        $companyName.textContent = data.name;
+        $companyPhone.textContent = data.phone;
+      },
+
+      isReady: function isReady() {
+        return this.readyState === 4 && this.status === 200;
+      },
     };
-    
-  }
+  })();
 
-  app().initialize();
-
+  app.init();
 })(window.DOM, document);
