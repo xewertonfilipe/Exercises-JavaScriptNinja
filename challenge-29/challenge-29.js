@@ -44,7 +44,6 @@
 
       handleSubmit: function handleSubmit(e) {
         e.preventDefault();
-        console.log('submit');
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild(app.createNewCar());
       },
@@ -58,6 +57,8 @@
         var $tdAno = doc.createElement('td');
         var $tdPlaca = doc.createElement('td');
         var $tdCor = doc.createElement('td');
+        var $tdOpcoes = doc.createElement('td');
+        var $tdButton = doc.createElement('button');
 
         $imagem.setAttribute('src', $('[data-js="url-imagem"]').get().value);
         $tdImagem.appendChild($imagem);
@@ -65,14 +66,25 @@
         $tdAno.textContent = $('[data-js="ano"]').get().value;
         $tdPlaca.textContent = $('[data-js="placa"]').get().value;
         $tdCor.textContent = $('[data-js="cor"]').get().value;
+        $tdButton.textContent = 'Remover';
+        // $tdButton.setAttribute('data-js', 'remove');
 
+        $tdOpcoes.appendChild($tdButton);
         $tr.appendChild($tdImagem);
         $tr.appendChild($tdMarca);
         $tr.appendChild($tdAno);
         $tr.appendChild($tdPlaca);
         $tr.appendChild($tdCor);
+        $tr.appendChild($tdOpcoes);
 
+        app.removeCar($tdOpcoes);
         return $fragment.appendChild($tr);
+      },
+
+      removeCar: function removeCar(button) {
+        button.addEventListener('click', function() {
+          button.parentNode.setAttribute('style', 'display:none');
+        })
       },
 
       companyInfo: function companyInfo() {
