@@ -8,7 +8,7 @@ Faça um pull request no seu repositório, na branch `challenge-31`, e cole
 o link do pull request no `console.log` abaixo.
 
 Faça um pull request, também com a branch `challenge-31`, mas no repositório
-do curso, para colar o link do pull request do seu repo.
+do curso, para colar o link do pull request do seu repo
 */
 
 console.log('Link do pull request do seu projeto');
