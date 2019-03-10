@@ -83,7 +83,7 @@
 
       removeCar: function removeCar(button) {
         button.addEventListener('click', function() {
-          button.parentNode.setAttribute('style', 'display:none');
+          button.parentNode.remove();
         })
       },
 
